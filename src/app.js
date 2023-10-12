@@ -1,11 +1,13 @@
 const Express = require ('express')
-
+const DB = require('./DB/mongodb')
+const router = require('./controllers/routes/usuarios')
 const app = Express();  
 
 app.use(Express.json());
+app.use(router);
 
 app.get('/', (req, res) =>{
-    res.json('hola')
+    res.send('hola')
 });
 
 
