@@ -1,0 +1,16 @@
+version: "2"
+
+services: 
+    appRentaCar:
+        container_name: Api
+        restart: always
+        build: .
+        ports: 
+            - "5000:3000"
+        links:
+            - mongodb
+    mongodb:
+        container_name: dbmongo
+        image: mongo
+        ports:   
+            - "27018:27017"
