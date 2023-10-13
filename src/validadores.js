@@ -51,14 +51,6 @@ function validaCamposVacios2(objeto) {
     return true;
 }
 
-async function validarNitDuplicado(nit, id) {
-    const encontrado = await dbUsuarios.findOne({ NIT: nit, _id: { $ne: id } });
-    if (!encontrado) {
-        return false;
-    }
-    return true;
-}
-
 async function validarCorreoDuplicado (correo, id){
     const encontrado = await dbUsuarios.findOne({CorreoElectronico : correo, _id : {$ne : id}});
     if (!encontrado){
@@ -73,7 +65,7 @@ const validadores = {
     validarClaveConClave,
     validaCamposVacios2,
     validaCorreoExistente,
-    validarNitDuplicado,
     validarCorreoDuplicado
 };
+
 module.exports = validadores;
