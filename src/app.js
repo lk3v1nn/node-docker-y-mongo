@@ -8,6 +8,10 @@ app.use(Express.json());
 app.use(usuariosRouter);
 app.use(reservacionesRouter);
 
+app.get('/', (req, res) =>{
+    res.send('hola')
+})
+
 app.listen('3000', () => {
-    console.log('Servidor iniciado en el puerto 3000');
+    console.log('Servidor iniciado en el puerto 4000');
 })
