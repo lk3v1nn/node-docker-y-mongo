@@ -1,7 +1,11 @@
 const jwt = require('jsonwebtoken');
 
 function verificaToken(req, res, next){
-    const token = req.headers["x-access-token"];
+    let token = req.headers["x-access-token"];
+    if(!token){
+        token = req.cookies.token
+    }
+    
     try{
         const tokenDesifrado = jwt.verify(token, 'palabrasecreta');
         req.tokenId = tokenDesifrado.id;
