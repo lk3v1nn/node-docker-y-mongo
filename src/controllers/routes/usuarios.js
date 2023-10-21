@@ -7,7 +7,6 @@ const validarDatosUsuario = require("../validarDatosUsuario");
 const router = Router();
 
 router.post("/api/login", async (req, res) => {
-    // res.cookie('miCookie', 'Hola, mundo', { maxAge: 900000, httpOnly: true });
     const { email, clave } = req.body;
     try {
         const data = await dbusuarios.findOne({ email, clave });
@@ -22,10 +21,10 @@ router.post("/api/login", async (req, res) => {
             expiresIn: 60 * 60 * 24 * 7,
         });
 
-        res.cookie("myToken", token, {
+        res.cookie("token", token, {
             httpOnly: false,
             secure: false,
-            maxAge: 1000 * 60 * 60 * 24 * 30,
+            maxAge: 60 * 60 * 24 * 30,
             path: "/",
         });
         res.send("Sesion iniciada correctamente.");
@@ -35,11 +34,6 @@ router.post("/api/login", async (req, res) => {
     }
 });
 
-router.get("/set-cookie", (req, res) => {
-    // Establece una cookie llamada 'miCookie' con el valor 'Hola, mundo'
-    res.cookie("miCookie", "Hola, mundo", { maxAge: 900000, httpOnly: true });
-    res.send("Cookie establecida correctamente wuuuuuuuuuuuu.");
-});
 
 //RUTA DE REGISTRO DE USUARIOS
 router.post("/api/registro", validarDatosUsuario, async (req, res) => {
@@ -71,5 +65,15 @@ router.post(
         } catch {}
     }
 );
+
+router.get("/api/cerrarsesion", (req, res) =>{
+    res.cookie("token", "", {
+        httpOnly: false,
+        secure: false,
+        maxAge: 60 * 60 * 24 * 30,
+        path: "/",
+    });
+    res.send("La sesion se ha cerrado.");
+})
 
 module.exports = router;

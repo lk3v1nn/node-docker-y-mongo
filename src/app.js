@@ -27,11 +27,11 @@ app.use(usuariosRouter);
 app.use(reservacionesRouter);
 
 app.get("/", (req, res) => {
-    console.log("cookies: ", req.cookies);
+    console.log("cookies: ", req.cookies.token);
     res.json({ mensaje: "hola viendo cookies" });
 });
 
-const puerto = 5000;
+const puerto = 3000;
 
 app.listen(puerto, () => {
     console.log(`Servidor iniciado en el puerto ${puerto}`);
