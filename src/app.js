@@ -14,25 +14,18 @@ app.use(function (req, res, next) {
     next();
 });
 
-// app.use(
-//     cors({
-//         origin: "http://localhost:3000",
-//         credentials: true,
-//     })
-// );
-
 app.use(cookieParser());
 app.use(Express.json());
 app.use(usuariosRouter);
 app.use(reservacionesRouter);
 
 app.get("/", (req, res) => {
-    console.log("cookies: ", req.cookies.token);
-    res.json({ mensaje: "hola viendo cookies" });
+    res.json('Servidor en linea')
+    // res.json({'tu cookie': req.cookies.token || ''})
 });
 
 const puerto = 3000;
 
 app.listen(puerto, () => {
-    console.log(`Servidor iniciado en el puerto ${puerto}`);
+    console.log(`Servidor iniciado`);
 });
